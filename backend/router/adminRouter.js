@@ -84,4 +84,30 @@ router.delete("/deleteCard", adminMiddleware, async (req, res) => {
   }
 });
 
+// edit a card
+router.put("/editCard", adminMiddleware, async (req, res) => {
+  const { id, name, description, linkedin, twitter, interests } = req.body;
+  try {
+    const updatedCard = await Card.findOneAndUpdate(
+      { _id: id },
+      {
+        name,
+        description,
+        linkedin,
+        twitter,
+        interests,
+      },
+      { new: true }
+    );
+
+    if (!updatedCard) {
+      return res.status(404).json({ msg: "card not found" });
+    }
+    res.status(200).json({ msg: "successfully updated", updatedCard });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+});
+
 module.exports = router;

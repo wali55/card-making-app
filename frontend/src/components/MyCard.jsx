@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const MyCard = ({ card, handleDelete }) => {
+const MyCard = ({ card, handleDelete, handleEdit }) => {
   return (
     <>
       <Grid2 item minWidth={350}>
@@ -42,6 +42,15 @@ const MyCard = ({ card, handleDelete }) => {
                 onClick={() => handleDelete(card?._id)}
               >
                 Delete
+              </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                color="warning"
+                sx={{ mt: 1, ml: 1 }}
+                onClick={() => handleEdit(card?._id, card)}
+              >
+                Edit
               </Button>
             </Box>
           </CardContent>
